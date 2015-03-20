@@ -1,0 +1,105 @@
+@import "compass";
+@import "susy";
+@import "compass/reset";
+@import "variables";
+@import "typography";
+@import "code";
+
+@include global-box-sizing(border-box);
+
+$susy: (
+  // debug: (
+  //   image: show,
+  //   output: overlay
+  // ),
+);
+
+body {
+  height: 100%;
+}
+
+.header {
+  width: 100%;
+  height: $header-height;
+  background-color: $black;
+  margin-bottom: $line-height * 2;
+
+  a {
+    color: $white;
+  }
+}
+
+.header {
+  color: $white;
+
+  .name {
+    padding-top: 15px;
+    font-size: 30px;
+
+    span.subtitle {
+      font-size: 17px;
+    }
+  }
+}
+
+.container {
+  @include container(700px);
+
+  .name {
+    height: $header-height / 2;
+    h1 {
+      font-size: $font-size * 3;
+      margin: 0;
+      padding: 0;
+      line-height: $line-height * 2;
+    }
+    h2 {
+      font-size: $font-size;
+      margin: 0;
+      padding: 0;
+      line-height: $line-height;
+    }
+  }
+
+  .links {
+    height: $header-height / 2;
+
+    ul {
+      float: left;
+      @include clearfix;
+
+      &.social {
+        float: right;
+      }
+
+      li {
+        display: inline-block;
+        line-height: $header-height / 2;
+        margin-right: 30px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &.feed a i {
+          color: $orange;
+        }
+      }
+    }
+  }
+}
+
+.wrap {
+  @include container(700px);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.container {
+  background: url('/images/lp.png') center center no-repeat;
+  background-size: 50px;
+}

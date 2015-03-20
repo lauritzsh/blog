@@ -1,0 +1,8 @@
+---
+title: Archive
+---
+
+h1 Archive
+ul
+  - blog.articles.each do |post|
+    li= "#{link_to post.title, post} - #{post.date.strftime('%b %e, %Y')}"

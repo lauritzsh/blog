@@ -1,0 +1,25 @@
+//-- Settings
+$base-line-height: 26px;
+
+//-- Colors
+$black:  #1D1F21;
+$white:  #FFFFFF;
+$blue:   #81A2BE;
+$cyan:   #8ABEB7;
+$green:  #B5BD68;
+$orange: #DE935F;
+$red:    #CC6666;
+$yellow: #F0C674;
+
+//-- Text
+$font-size: 17px;
+$monospace-size: 12px;
+$line-height: $base-line-height;
+$monospace-height: $font-size;
+
+$headline-font: 'Roboto', sans-serif;
+$body-font: 'Open Sans', sans-serif;
+$monospace-font: 'Monaco', 'Lucida Console', monospace;
+
+//-- Components
+$header-height: $line-height * 8;

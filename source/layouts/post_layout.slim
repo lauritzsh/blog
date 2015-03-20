@@ -1,0 +1,12 @@
+= wrap_layout :layout do
+  .post-info
+    - tags = []
+    - current_article.tags.each do |tag|
+      - tags << (link_to tag, tag_path(tag))
+    span.date= current_article.date.strftime("%b %e, %Y") + ' - ' + tags.join(', ')
+    h1= current_article.title
+  = yield
+  hr
+  p If you liked the post and want more, then be sure to subscribe to the
+    #{link_to "newsletter", "https://feedburner.google.com/fb/a/mailverify?uri=lauritzblog&amp;loc=en_US"}
+    or #{link_to "feed", "http://feeds.feedburner.com/lauritzblog"}.

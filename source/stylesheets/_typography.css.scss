@@ -1,0 +1,153 @@
+body {
+  font-size: $font-size;
+  font-family: $body-font;
+  line-height: $line-height;
+}
+
+.header {
+  a {
+    color: $white;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &:hover, &:focus {
+      color: $white;
+      text-decoration: none;
+    }
+  }
+
+  .name a {
+    text-transform: lowercase;
+  }
+}
+
+p {
+  margin-bottom: $line-height;
+  font-family: $body-font;
+}
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: bold;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin-top: $line-height * 1.5;
+  margin-bottom: $line-height;
+  font-family: $headline-font;
+}
+
+a {
+  color: $blue;
+  text-decoration: none;
+
+  &:hover, &:focus {
+    text-decoration: underline;
+  }
+}
+
+h1 {
+  font-size: 3em;
+  font-weight: 100;
+  line-height: $font-size * 3;
+
+  a, a:hover, a:focus {
+    text-decoration: none;
+    color: $black;
+  }
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: 100;
+  line-height: $line-height * 1.5;
+  margin-bottom: 26px;
+
+  a, a:hover, a:focus {
+    text-decoration: none;
+    color: $black;
+  }
+
+  &.title {
+    font-weight: 300;
+  }
+}
+
+h3 {
+  font-size: 1.5em;
+  font-weight: 100;
+}
+
+.post-info {
+  margin-top: $line-height * 4;
+}
+.post-info span.date {
+  font-size: $font-size * 0.75;
+  text-transform: lowercase;
+}
+.post-info:first-of-type {
+  margin-top: 0;
+}
+.post-info h1, .post-info h2 {
+  margin-top: 26px;
+}
+
+.highlight {
+  margin-bottom: $line-height;
+}
+
+code, pre {
+  font-family: $monospace-font;
+  font-size: $monospace-size;
+  line-height: $monospace-height;
+}
+code {
+  font-size: $monospace-size * 1.2;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 3px;
+  padding: $font-size * 0.2;
+}
+
+.wrap {
+  ol, ul {
+    margin-bottom: $line-height;
+  }
+  ol {
+    display: table;
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none;
+
+    li {
+      display: table-row;
+      counter-increment: table-ol;
+
+      &:before {
+        content: counter(table-ol) ".";
+        display: table-cell;
+        padding-right: $font-size * 0.4;
+        text-align: right;
+      }
+    }
+  }
+  ul {
+    display: table;
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none;
+
+    li {
+      display: table-row;
+
+      &:before {
+        font-family: sans-serif;
+        content: "•";
+        display: table-cell;
+        padding-right: $font-size * 0.4;
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    meta charset="utf-8" /
+    meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" /
+    meta name="description" content="A blog about web development - tools, frameworks, technologies and more"
+    meta name="keywords" content="html,css,web,development,javascript,tutorial,blog"
+    meta name="author" content="Lauritz Hilsøe"
+    title= current_article && current_article.title || current_page && current_page.data.title || "lauritz.me"
+    / = feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom Feed"
+    = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Roboto:100,300|Open+Sans:400italic,700italic,700,400"
+    = stylesheet_link_tag "stylesheets/site"
+    = stylesheet_link_tag "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+  body
+    .header
+      .container
+        .name
+          h1.blog-name= link_to "lauritz.me", "/index.html"
+          h2.subtitle from novice to expert
+        .links
+          ul
+            li= link_to "Home", "/index.html"
+            li= link_to "About", "/about.html"
+            li= link_to "Archive", "/archive.html"
+          ul.social
+            li= link_to '<i class="fa fa-github-alt fa-lg"></i>', "https://github.com/lauritzsh"
+            li= link_to '<i class="fa fa-twitter fa-lg"></i>', "https://twitter.com/lauritzsh"
+            li= link_to '<i class="fa fa-envelope fa-lg"></i>', "https://feedburner.google.com/fb/a/mailverify?uri=lauritzme&amp;loc=en_US"
+            li.feed= link_to '<i class="fa fa-rss fa-lg"></i>', "http://feeds.feedburner.com/lauritzme"
+    .wrap
+      = yield
+      = partial "partials/tracking"
