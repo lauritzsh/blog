@@ -10,3 +10,12 @@ github_username:  lauritzsh
 
 # Build settings
 markdown: redcarpet
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "default"
+      comments: true
