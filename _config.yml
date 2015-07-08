@@ -21,3 +21,6 @@ defaults:
     values:
       layout: "default"
       comments: true
+
+gems:
+  - jekyll-sitemap
