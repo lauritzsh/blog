@@ -9,6 +9,7 @@ twitter_username: lauritzsh
 github_username:  lauritzsh
 timezone: Europe/Copenhagen
 permalink: /:title/
+excerpt_separator: <!--more-->
 
 # Build settings
 markdown: redcarpet

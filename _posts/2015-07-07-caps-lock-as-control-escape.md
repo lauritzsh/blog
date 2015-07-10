@@ -5,6 +5,10 @@ categories: tutorial
 tags: vim tmux terminal
 ---
 
+Easily make the Caps Lock _much_ more useful than it currently is.
+
+<!--more-->
+
 Two tools I can't be without for getting some coding done is [Vim][vim] as my
 text editor and [tmux][tmuxl] for managing my [terminal][iterm2].
 
