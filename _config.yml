@@ -14,6 +14,9 @@ excerpt_separator: <!--more-->
 # Build settings
 markdown: redcarpet
 
+redcarpet:
+  extensions: [footnotes]
+
 defaults:
   -
     scope:
