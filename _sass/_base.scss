@@ -203,3 +203,15 @@ pre {
         }
     }
 }
+
+
+/**
+ * Markdown
+ */
+.footnotes > ol > li > p {
+    margin-bottom: 0;
+}
+
+.footnotes > hr {
+    margin-bottom: 15px;
+}
