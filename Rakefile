@@ -16,9 +16,11 @@ task :post do
   template = <<END
 ---
 layout: post
-title: "#{title}"
-categories: 
-tags: 
+title: #{title}
+categories:
+  - 
+tags:
+  - 
 ---
 
 END

@@ -1,8 +1,12 @@
 ---
 layout: post
-title: "Caps Lock as both Control and Escape"
-categories: tutorial
-tags: vim tmux terminal
+title: Caps Lock as both Control and Escape
+categories:
+  - tutorial
+tags:
+  - vim
+  - tmux
+  - terminal
 ---
 
 Easily make the Caps Lock _much_ more useful than it currently is.

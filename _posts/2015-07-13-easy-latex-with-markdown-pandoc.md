@@ -1,8 +1,12 @@
 ---
 layout: post
-title: "Easy LaTeX with Markdown and Pandoc"
-categories: tutorial
-tags: latex markdown pandoc
+title: Easy LaTeX with Markdown and Pandoc
+categories:
+  - tutorial
+tags:
+  - latex
+  - markdown
+  - pandoc
 ---
 
 Best of both worlds; power and beauty of LaTeX with the simplicity of Markdown.

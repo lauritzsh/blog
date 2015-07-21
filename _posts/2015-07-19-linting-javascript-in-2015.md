@@ -1,8 +1,12 @@
 ---
 layout: post
-title: "Linting JavaScript in 2015"
-categories: tutorial
-tags: vim javascript eslint
+title: Linting JavaScript in 2015
+categories:
+  - tutorial
+tags:
+  - vim
+  - javascript
+  - eslint
 ---
 
 Better and more consistent JavaScript coding using a linter.
