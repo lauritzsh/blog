@@ -47,14 +47,17 @@ are accessing an undefined variable they will tell you.
 syntax errors and warn you about them. If you are only caring about your code
 style this might be for you since it comes with a lot of [presets][presets].
 
+![ESLint's logo](/images/eslint.png)
+
 ### Then came ESLint
 What I recommend is [ESLint][eslint]. It offers more than JSHint and JSCS and
-even performs faster.[^1] What's really great ESLint and why I recommend it is
-because you can use your own parser or extend it with plugins.
+even performs faster.[^1] What's really great about ESLint and why I recommend
+it is because you can use your own parser or extend it with plugins.
 
 What does it mean to use your own parser? ESLint does most of ES6[^2] but not
 everything. That's why [Babel][babel] wrote their own [parser][parser] to lint
-for all valid Babel code, so you can instead make use of `babel-eslint`.[^3]
+for all valid Babel code This mean you can instead make use of
+`babel-eslint`[^3] to lint ES6 code.
 
 Using ESLint we can even lint JSX files which isn't supported out-of-the-box.
 All it requires is to install the [ESLint-plugin-React][plugin] module and tell
@@ -65,8 +68,8 @@ I will show you how it all works.
 
 ## Better code with ESLint
 **Note:** We get a lot of rules enabled by default now but this is soon to
-change with `1.0.0` coming up. What we can do is pass `--reset` to disable
-everything. It might also help make it more clear to see what is enabled and in
+[change][v1] with `1.0.0` coming up. What we can do is pass `--reset` to disable
+everything.  It might also help make it more clear to see what is enabled and in
 use too.
 
 So let's lint some files. Be sure to have [Node][node] and [npm][npm] (should
@@ -128,8 +131,8 @@ Create `.eslintrc` and write:
 }
 ```
 
-Some rules take an array. The first rule is the severity of breaking a rule. 0
-means it is disabled, 1 means a warning and 2 is an error. In `"indent"` the
+Some rules take an array. The first value is the severity of breaking the rule.
+0 means it is disabled, 1 means a warning, and 2 is an error. In `"indent"` the
 second 2 is the number of spaces we will allow.
 
 The `"vars": "local"` has to do whether we only disallow unused local variables
@@ -157,10 +160,11 @@ we can easily lint in the future.
 **Note:** we use `; exit 0` because we get errors and npm thinks something bad
 is going on. Try remove it and see. You might not use this if you want to use
 the exit code of ESLint for anything. Consider writing a separate script for
-that.  The `eslint .` means we will lint every file in this directory.
+that.  The `eslint .` means we will lint every file (by default files with the
+`.js` extension) in this directory.
 
 You can now lint easily using npm with `npm run lint`. You should now get a nice
-list of the errors and warning we specified:
+list of the errors and the warning we specified:
 
 ```
 > test@1.0.0 lint /Users/Lauritz/Downloads/test
@@ -214,21 +218,22 @@ Now rewrite your `.eslintrc` file with:
 ```
 
 That is it really. Now you will use their guide to lint and style check your own
-projects. If you type `npm run lint` again you will see an error and warning.
+projects. You can type `npm run lint` again but now you will see an error and
+warning.
 
 This is because we are using `var` that is discouraged in ES6 and should instead
-be a `const`. By default we shouldn't really keep `console.log` as it is mostly
-used for debugging but it is only a warning.
+be a `const`. By default we shouldn't really keep `alert` as it is mostly used
+for debugging but it is only a warning.
 
-Say you want to keep using `var` (for whatever reason) and `console.log`, you
-can just override their rules:
+Say you want to keep using `var` (for whatever reason) and `alert`, you can just
+override their rules:
 
 ```json
 {
   "extends": "eslint-config-airbnb",
   "rules": {
     "no-var": 0,
-    "no-console": 0
+    "no-alert": 0
   }
 }
 ```
@@ -265,6 +270,7 @@ members. Agree on a standard and use ESLint to abide them.
 [babel]:     https://github.com/babel/babel
 [parser]:    https://github.com/babel/babel-eslint
 [plugin]:    https://github.com/yannickcr/eslint-plugin-react
+[v1]:        http://eslint.org/blog/2015/07/eslint-1.0.0-rc-1-released/#reset-is-now-the-default
 [node]:      https://nodejs.org/
 [npm]:       https://www.npmjs.com/
 [airbnb]:    https://github.com/airbnb/javascript
