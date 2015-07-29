@@ -25,8 +25,6 @@ Linting helps you (and your team) setting up clear style guides for how the code
 should be written. It's actually even more than that since it can help you
 detect (mundane) errors while you code.
 
-I will show you how you can lint and style check your project files.
-
 
 ## Short lint history for JavaScript
 It all started with [JSLint][jslint]. It was pretty easy configure, because
@@ -62,8 +60,6 @@ for all valid Babel code This mean you can instead make use of
 Using ESLint we can even lint JSX files which isn't supported out-of-the-box.
 All it requires is to install the [ESLint-plugin-React][plugin] module and tell
 ESLint to use it.
-
-I will show you how it all works.
 
 
 ## Better code with ESLint
@@ -112,9 +108,9 @@ keep hitting Enter. Let's install it as a dev dependency: `npm install
 --save-dev eslint` or `npm i -D eslint`.
 
 ESLint will look for a file called `.eslintrc`. That is where our rules will go
-in, but we also have to define the environment in which our code will be run.
-We assume this code will only be run in the browser (because of `alert`) so we
-will set the env to browser.
+in, but we also have to define the environment in which our code will run. We
+can assume this code will only run in the browser (because of `alert` since it
+is only available in the browser) so we will set the env to browser.
 
 Create `.eslintrc` and write:
 
