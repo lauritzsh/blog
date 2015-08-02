@@ -54,7 +54,7 @@ it is because you can use your own parser or extend it with plugins.
 
 What does it mean to use your own parser? ESLint does most of ES6[^2] but not
 everything. That's why [Babel][babel] wrote their own [parser][parser] to lint
-for all valid Babel code This mean you can instead make use of
+for all valid Babel code. This mean you can instead make use of
 `babel-eslint`[^3] to lint ES6 code.
 
 Using ESLint we can even lint JSX files which isn't supported out-of-the-box.
