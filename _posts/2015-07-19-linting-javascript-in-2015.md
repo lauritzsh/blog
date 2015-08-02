@@ -103,9 +103,12 @@ greet();
 Two wrongly indented lines, an unused variable and a message alert!
 ESLint is not going to like that.
 
+**Update: ESLint v1.0.0 is out and I plan to update this post to reflect that
+soon. To follow along for now, be sure to specify v0.24.1.**
+
 So now we need our `package.json` to install ESLint. Type `npm init` and just
 keep hitting Enter. Let's install it as a dev dependency: `npm install
---save-dev eslint` or `npm i -D eslint`.
+--save-dev eslint@0.24.1`; or use a shortcut: `npm i -D eslint@0.24.1`.
 
 ESLint will look for a file called `.eslintrc`. That is where our rules will go
 in, but we also have to define the environment in which our code will run. We
@@ -118,7 +121,7 @@ Create `.eslintrc` and write:
 {
   "rules": {
     "indent": [2, 2],
-    "no-unused-vars": [2, {"vars": "local", "args": "after-used"}],
+    "no-unused-vars": [2, {"vars": "all", "args": "after-used"}],
     "no-alert": 1
   },
   "env": {
@@ -131,9 +134,10 @@ Some rules take an array. The first value is the severity of breaking the rule.
 0 means it is disabled, 1 means a warning, and 2 is an error. In `"indent"` the
 second 2 is the number of spaces we will allow.
 
-The `"vars": "local"` has to do whether we only disallow unused local variables
-or globals too. `"args": "after-used"` means only the last parameter in a
-function is required to be used.
+The `"vars": "all"` has to do whether we only disallow unused local variables or
+globals too. Local here being in new scopes (such as functions for example).
+`"args": "after-used"` means only the last parameter in a function is required
+to be used.
 
 We set `"no-alert"` to 1 only since it has no options and we just want a
 warning.
@@ -153,27 +157,28 @@ we can easily lint in the future.
 }
 ```
 
-**Note:** we use `; exit 0` because we get errors and npm thinks something bad
-is going on. Try remove it and see. You might not use this if you want to use
-the exit code of ESLint for anything. Consider writing a separate script for
-that.  The `eslint .` means we will lint every file (by default files with the
-`.js` extension) in this directory.
-
-You can now lint easily using npm with `npm run lint`. You should now get a nice
+You can now lint easily using npm with `npm run lint`. You should get a nice
 list of the errors and the warning we specified:
 
 ```
-> test@1.0.0 lint /Users/Lauritz/Downloads/test
+> eslint-example@1.0.0 lint /Users/Lauritz/Developer/eslint-example
 > eslint . --reset; exit 0
 
 
 index.js
+  1:4  error    unusued is defined but never used     no-unused-vars
   4:2  error    Expected indentation of 2 characters  indent
   5:2  error    Expected indentation of 2 characters  indent
   5:4  warning  Unexpected alert                      no-alert
 
-✖ 3 problems (2 errors, 1 warning)
+✖ 4 problems (3 errors, 1 warning)
 ```
+
+**Note:** we use `; exit 0` because we get errors and npm thinks something bad
+is going on. Try remove it and re-run. You might not use this if you want to use
+the exit code of ESLint for anything. Consider writing a separate script for
+that. The `eslint .` means we will lint every file (by default files with the
+`.js` extension) in this directory.
 
 Let's fix this. Open up `index.js` and make ESLint happy:
 
