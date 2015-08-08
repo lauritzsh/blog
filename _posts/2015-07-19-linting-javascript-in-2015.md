@@ -27,7 +27,7 @@ detect (mundane) errors while you code.
 
 
 ## Short lint history for JavaScript
-It all started with [JSLint][jslint]. It was pretty easy configure, because
+It all started with [JSLint][jslint]. It is pretty easy to configure, because
 there is no configuration! The rules are defined by [Douglas
 Crockford][crockford] from his [JavaScript: The Good Parts][goodparts]. You
 install it and scan your files.
@@ -52,21 +52,28 @@ What I recommend is [ESLint][eslint]. It offers more than JSHint and JSCS and
 even performs faster.[^1] What's really great about ESLint and why I recommend
 it is because you can use your own parser or extend it with plugins.
 
-What does it mean to use your own parser? ESLint does most of ES6[^2] but not
-everything. That's why [Babel][babel] wrote their own [parser][parser] to lint
-for all valid Babel code. This mean you can instead make use of
-`babel-eslint`[^3] to lint ES6 code.
+What does it mean to use your own parser? ESLint does all of ES6[^2] but if
+you're using [Babel][babel] to transpile you might use some experimental
+features. That's why Babel wrote their own [parser][parser] to lint for all
+valid Babel code. This mean you can instead make use of `babel-eslint` to lint
+your ES6/ES7 code.
 
-Using ESLint we can even lint JSX files which isn't supported out-of-the-box.
-All it requires is to install the [ESLint-plugin-React][plugin] module and tell
-ESLint to use it.
+We can even extend ESLint to better support JSX than what it currently does
+out-of-the-box. All it requires is to install the [ESLint-plugin-React][plugin]
+module and tell ESLint to use it. Now we have plenty of new specific JSX rules
+we can use.
+
+This is what I find really great about ESLint.
 
 
 ## Better code with ESLint
-**Note:** We get a lot of rules enabled by default now but this is soon to
-[change][v1] with `1.0.0` coming up. What we can do is pass `--reset` to disable
-everything.  It might also help make it more clear to see what is enabled and in
-use too.
+Should you have trouble following along then I have created a very simple
+example [repository](https://github.com/lauritzsh/eslint-example) with the
+different code examples from this post.
+
+By default ESLint will have all rules disabled. This is different compared to
+earlier versions where some rules would be enabled by default. We'll keep them
+all disabled now and later show how to enable the most sane defaults easily.
 
 So let's lint some files. Be sure to have [Node][node] and [npm][npm] (should
 come with Node) installed.
@@ -77,7 +84,7 @@ We will need a new directory for our project, so let's create one: `mkdir test
 Rules can be defined as warnings or errors. The difference is the exit code.
 Warnings will exit with `0` but errors will exit with `1`. This can be really
 useful in combination with Git pre-commit or your build tools, as you can use
-this to stop doing 'dirty' commits.
+this to stop doing 'dirty' commits for example.
 
 So let's define some rules and their severity:
 
@@ -103,12 +110,9 @@ greet();
 Two wrongly indented lines, an unused variable and a message alert!
 ESLint is not going to like that.
 
-**Update: ESLint v1.0.0 is out and I plan to update this post to reflect that
-soon. To follow along for now, be sure to specify v0.24.1.**
-
 So now we need our `package.json` to install ESLint. Type `npm init` and just
 keep hitting Enter. Let's install it as a dev dependency: `npm install
---save-dev eslint@0.24.1`; or use a shortcut: `npm i -D eslint@0.24.1`.
+--save-dev eslint` or `npm i -D eslint`.
 
 ESLint will look for a file called `.eslintrc`. That is where our rules will go
 in, but we also have to define the environment in which our code will run. We
@@ -131,8 +135,10 @@ Create `.eslintrc` and write:
 ```
 
 Some rules take an array. The first value is the severity of breaking the rule.
-0 means it is disabled, 1 means a warning, and 2 is an error. In `"indent"` the
-second 2 is the number of spaces we will allow.
+0 means it is disabled, 1 is a warning, and 2 is an error. The second is
+(optional) options for that rule.
+
+In `"indent"` the second 2 is the number of spaces we will allow.
 
 The `"vars": "all"` has to do whether we only disallow unused local variables or
 globals too. Local here being in new scopes (such as functions for example).
@@ -151,7 +157,7 @@ we can easily lint in the future.
 {
   ...
   "scripts": {
-    "lint": "eslint . --reset; exit 0"
+    "lint": "eslint .; exit 0"
   },
   ...
 }
@@ -162,14 +168,14 @@ list of the errors and the warning we specified:
 
 ```
 > eslint-example@1.0.0 lint /Users/Lauritz/Developer/eslint-example
-> eslint . --reset; exit 0
+> eslint .; exit 0
 
 
 index.js
-  1:4  error    unusued is defined but never used     no-unused-vars
-  4:2  error    Expected indentation of 2 characters  indent
-  5:2  error    Expected indentation of 2 characters  indent
-  5:4  warning  Unexpected alert                      no-alert
+  1:5  error    unusued is defined but never used                 no-unused-vars
+  4:5  error    Expected indentation of 2 characters but found 4  indent
+  5:5  error    Expected indentation of 2 characters but found 4  indent
+  5:5  warning  Unexpected alert                                  no-alert
 
 ✖ 4 problems (3 errors, 1 warning)
 ```
@@ -185,7 +191,7 @@ Let's fix this. Open up `index.js` and make ESLint happy:
 ```javascript
 function greet() {
   var message = 'Hello, World!';
-  console.log(message);
+  alert(message);
 }
 
 greet();
@@ -204,10 +210,11 @@ through the [rules][rules] or realize they already have written an
 
 You can actually install their guide as a module for ESLint. Their module is
 dependent on another parser though, the `babel-eslint` I mentioned earlier so we
-will need that as well.
+will need that as well (it is unfortunately also dependent on
+`eslint-plugin-react` even if you don't care about React).
 
 ```bash
-npm i -D babel-eslint eslint-config-airbnb
+npm i -D babel-eslint eslint-config-airbnb eslint-plugin-react
 ```
 
 Now rewrite your `.eslintrc` file with:
@@ -241,6 +248,18 @@ override their rules:
 
 Now ESLint should stop complaining.
 
+### Sane defaults
+Want to start using ESLint but with some sane defaults? You can enable the
+recommended rules with:
+
+```json
+{
+  "extends": "eslint:recommended"
+}
+```
+
+It will turn all rules marked "(recommended)" from the [rules][rules] on.
+
 ## Automatically lint as you write
 It was my plan to show how you can setup a text editor (Vim) to automatically
 lint your files as you write them, but I think this guide is already longer than
@@ -260,6 +279,13 @@ as well help you write cleaner and more consistent code.
 Setup a linter once and stop having arguments about code style with your team
 members. Agree on a standard and use ESLint to abide them.
 
+Be sure to check out the
+[repository](https://github.com/lauritzsh/eslint-example) for the different code
+examples from this post.
+
+**Updated 2015/08/08:** post has been updated to latest version of ESLint (v1.1
+at the time of writing).
+
 [jslint]:    http://www.jslint.com/help.html
 [crockford]: http://www.crockford.com/
 [goodparts]: http://www.amazon.com/exec/obidos/ASIN/0596517742/wrrrldwideweb
@@ -271,13 +297,11 @@ members. Agree on a standard and use ESLint to abide them.
 [babel]:     https://github.com/babel/babel
 [parser]:    https://github.com/babel/babel-eslint
 [plugin]:    https://github.com/yannickcr/eslint-plugin-react
-[v1]:        http://eslint.org/blog/2015/07/eslint-1.0.0-rc-1-released/#reset-is-now-the-default
 [node]:      https://nodejs.org/
 [npm]:       https://www.npmjs.com/
 [airbnb]:    https://github.com/airbnb/javascript
 [rules]:     http://eslint.org/docs/rules/
-[airlint]:   https://github.com/airbnb/javascript/blob/master/linters/.eslintrc
+[airlint]:   https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb/.eslintrc
 
 [^1]: [How does ESLint performance compare to JSHint and JSCS?](https://github.com/eslint/eslint/tree/4ea9a53044e598bb4f2c3e6b37625d735b4826af#how-does-eslint-performance-compare-to-jshint-and-jscs)
 [^2]: Have we decided on ES6 or ES2015?
-[^3]: Using `babel-eslint` should soon not be necessary to use though: [New Language Features](http://eslint.org/blog/2015/07/eslint-1.0.0-rc-1-released/#new-language-features)
