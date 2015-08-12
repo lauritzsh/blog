@@ -14,7 +14,7 @@ layout: default
         <h2 class="index-post-title">
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h2>
-        {{ post.excerpt }}
+        <p class="post-teaser">{{ post.excerpt | remove: '<p>' | remove: '</p>' }}</p>
       </li>
     {% endfor %}
   </ul>

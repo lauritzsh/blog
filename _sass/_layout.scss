@@ -185,7 +185,16 @@
 
 .post-link {
     display: block;
-    font-size: 24px;
+    font-size: 30px;
+    color: $text-color;
+}
+
+.index-post-title {
+    margin-bottom: 0;
+}
+
+.post-teaser {
+    margin-bottom: $spacing-unit * 2;
 }
 
 
