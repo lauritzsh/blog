@@ -283,9 +283,12 @@ Be sure to check out the
 [repository](https://github.com/lauritzsh/eslint-example) for the different code
 examples from this post.
 
+The post can be discussed at [reddit][reddit].
+
 **Updated 2015/08/08:** post has been updated to latest version of ESLint (v1.1
 at the time of writing).
 
+[reddit]:    https://www.reddit.com/r/javascript/comments/3f2x9l/how_to_properly_lint_javascript_in_2015/
 [jslint]:    http://www.jslint.com/help.html
 [crockford]: http://www.crockford.com/
 [goodparts]: http://www.amazon.com/exec/obidos/ASIN/0596517742/wrrrldwideweb
